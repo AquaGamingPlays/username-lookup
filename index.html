@@ -1,0 +1,57 @@
+<html lang=en>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./stylesheet.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="./main.js"></script>
+    <link rel="icon" href="icon.jpg">
+    <title>Username Lookup</title>
+  </head>
+  <body>
+    <div id="dark5" class="jumbotron text-center">
+      <h1>Username Lookup</h1>
+    </div>
+    <form class="example" action="" style="margin:auto;max-width:425px">
+      <input type="text" placeholder="Username/UUID" name="lookup">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+    <p></p>
+    <p class="center"><button class="btn btn-primary btn-sm" id="dark4" onclick="dmToggle()">Toggle dark mode</button></p>
+    <div class="container" style="text-align:center">
+      <div class="row" style="text-align:center">
+        <div id="skinbox" class="col-sm-4" style="text-align:center">
+          <h3>Skin Info</h3>
+          <img id="skin" width="180" height="433">
+          <p></p>
+          <img id="face" width="180" height="180">
+        </div>
+        <div id="userbox" class="col-sm-4">
+          <h3>User Info</h3>
+          <ul id="dark" class="list-group" style="text-align:center">
+            <li id="username" class="list-group-item"></li>
+            <li id="status" class="list-group-item"></li>
+            <li id="uuid" class="list-group-item"></li>
+            <li id="history" class="list-group-item"></li>
+          </ul>
+        </div>
+        <div id="capebox" class="col-sm-4">
+          <h3>Cape Info</h3>
+          <ul id="dark6" class="list-group" style="text-align:center">
+            <li id="dark7" class="list-group-item">Minecraft Cape<br/>
+              <img id="minecraft" width="92" height="44">
+            </li>
+            <li id="dark8" class="list-group-item">Optifine Cape<br/>
+              <img id="optifine" width="92" height="44">
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center">Credit to <a href="https://mc-heads.net">MCHeads</a> for the Skin API, and <a href="https://github.com/Electroid/mojang-api">Electroid</a> for the amazing API endpoint!</p>
+  </body>
+  <script src="./darkmode.js"></script>
+</html>
