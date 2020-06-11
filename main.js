@@ -5,7 +5,7 @@
 var query = location.href.substring(location.href.indexOf("?lookup=") + 8); // get username that we want to look up
 
 // user info stuff
-$.get("http://13.90.91.192/unpredictaproxy/ashcon/" + query).done(function(data) {
+$.get("http://tanpug.eastus.cloudapp.azure.com/unpredictaproxy/ashcon/" + query).done(function(data) {
     // initialize variables
     var uuid = data.uuid;
     var username = data.username;
@@ -111,7 +111,7 @@ $.get("http://13.90.91.192/unpredictaproxy/ashcon/" + query).done(function(data)
     }
 
     // get migration status
-    $.get("http://13.90.91.192/unpredictaproxy/sessionserver/" + trimmedUUID).done(function(data) {
+    $.get("http://tanpug.eastus.cloudapp.azure.com/unpredictaproxy/sessionserver/" + trimmedUUID).done(function(data) {
         if (data.legacy == undefined) {
             var status = "Migrated"; // if legacy doesn't exist
         } else {
