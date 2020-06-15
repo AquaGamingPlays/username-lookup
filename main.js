@@ -2,6 +2,12 @@
 // main functions and api calls for username lookup
 // copyright (c) tanpug 2020
 
+// auto-selects searchbar
+$(function()
+{
+    $('#searchbar').focus();
+});
+
 var query = location.href.substring(location.href.indexOf("?lookup=") + 8); // get username that we want to look up
 
 // user info stuff
