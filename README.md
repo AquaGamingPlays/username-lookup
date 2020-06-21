@@ -9,5 +9,7 @@ Many updates are going to come such as caching and username history lookup inste
 
 CREDITS:
 github.com/Electroid : Providing amazing API endpoint
+
 mc-heads.net : Providing Skin API
+
 sessionserver.mojang.com : Providing legacy status
