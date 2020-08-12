@@ -8,6 +8,8 @@ CREDITS:
 
 github.com/Electroid : Providing amazing API endpoint
 
-mc-heads.net : Providing Skin API
+mc-heads.net : Providing Skin textures
 
 sessionserver.mojang.com : Providing legacy status
+
+s.optifine.net : Providing Optifine cape textures
