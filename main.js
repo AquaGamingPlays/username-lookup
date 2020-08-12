@@ -21,7 +21,7 @@ $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
     var creaDate = data.created_at;
     // update html
     document.getElementById('username').innerHTML = username;
-    document.getElementById('uuid').innerHTML = "<code>" + trimmedUUID + "</code>";
+    document.getElementById('uuidcode dark9').innerHTML = trimmedUUID;
     document.getElementById('optifine').src = 'https://api.gapple.pw/cors/optifine.php?id=' + username;
     document.getElementById('skin').src = 'https://mc-heads.net/body/' + uuid;
     document.getElementById('face').src = 'https://mc-heads.net/avatar/' + uuid;

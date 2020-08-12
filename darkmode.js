@@ -24,6 +24,8 @@ function darkMode() {
     y.classList.toggle("dm1")
     var y = document.getElementById("dark8");
     y.classList.toggle("dm1")
+    var y = document.getElementById("uuidcode dark9");
+    y.classList.toggle("dm2")
     var y = document.getElementById("history");
     y.classList.toggle("dm1")
 }

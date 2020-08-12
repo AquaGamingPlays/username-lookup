@@ -55,4 +55,8 @@ input {
     color: black !important;
 }
 
-
+.dm2 {
+    border: 1px solid white;
+    background-color: #1b151f;
+    color: white;
+}
