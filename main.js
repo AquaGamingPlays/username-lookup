@@ -18,19 +18,18 @@ $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
     var history = JSON.stringify(data.username_history);
     var trimmedUUID = uuid.replace(/-/g, ''); // remove dashes from uuid with regex
     var textureJSON = data.textures.cape; // cape url stuff
-
+    var creaDate = data.created_at;
     // update html
     document.getElementById('username').innerHTML = username;
-    document.getElementById('uuid').innerHTML = trimmedUUID;
+    document.getElementById('uuid').innerHTML = "<code>" + trimmedUUID + "</code>";
     document.getElementById('optifine').src = 'https://api.gapple.pw/cors/optifine.php?id=' + username;
     document.getElementById('skin').src = 'https://mc-heads.net/body/' + uuid;
     document.getElementById('face').src = 'https://mc-heads.net/avatar/' + uuid;
-
     // update mc cape image
     if (typeof textureJSON === 'undefined' || textureJSON === null) {
         document.getElementById('minecraft').src = "";
     } else {
-        var httpsCapeURL = textureJSON.url.replace(/http/g, 'https');
+    	var httpsCapeURL = textureJSON.url.replace(/http/g, 'https');
         document.getElementById('minecraft').src = httpsCapeURL;
     }
 
@@ -134,5 +133,10 @@ $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
             document.getElementById('status').innerHTML = "Unmigrated + " + demo; // add demo status
         	}
     	}
+    	    if (typeof creaDate === 'undefined' || creaDate === null) {
+
+    		} else {
+    		document.getElementById('status').innerHTML += '<br>' + 'Created at: ' + creaDate;
+   			}
     });
 });
