@@ -11,7 +11,7 @@ $(function()
 var query = location.href.substring(location.href.indexOf("?lookup=") + 8); // get username that we want to look up
 
 // user info stuff
-$.get("http://tanpug.eastus.cloudapp.azure.com/unpredictaproxy/ashcon/" + query).done(function(data) {
+$.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
     // initialize variables
     var uuid = data.uuid;
     var username = data.username;
@@ -116,13 +116,22 @@ $.get("http://tanpug.eastus.cloudapp.azure.com/unpredictaproxy/ashcon/" + query)
         }
     }
 
-    // get migration status
-    $.get("http://tanpug.eastus.cloudapp.azure.com/unpredictaproxy/sessionserver/" + trimmedUUID).done(function(data) {
+    // get migration and demo status
+    $.get("https://api.gapple.pw/cors/profile.php?id=" + trimmedUUID).done(function(data) {
         if (data.legacy == undefined) {
             var status = "Migrated"; // if legacy doesn't exist
         } else {
             var status = "Unmigrated"; // if legacy exists
         }
         document.getElementById('status').innerHTML = status; // add migration status
+
+        if (status === "Unmigrated") {
+        	if (data.demo == undefined) {
+
+        	} else {
+            var demo = "Demo"; // if demo exists
+            document.getElementById('status').innerHTML = "Unmigrated + " + demo; // add demo status
+        	}
+    	}
     });
 });
