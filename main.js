@@ -30,7 +30,8 @@ $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
     if (typeof textureJSON === 'undefined' || textureJSON === null) {
         document.getElementById('minecraft').src = "";
     } else {
-        document.getElementById('minecraft').src = textureJSON.url;
+        var httpsCapeURL = textureJSON.url.replace(/http/g, 'https');
+        document.getElementById('minecraft').src = httpsCapeURL;
     }
 
     // name history stuff
