@@ -23,11 +23,19 @@ $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
     document.getElementById('username').innerHTML = username;
     document.getElementById('uuidcode dark9').innerHTML = trimmedUUID;
     document.getElementById('optifine').src = 'https://api.gapple.pw/cors/optifine.php?id=' + username;
+
+    // checks if optifine cape exists
+	let img = document.createElement('img');
+	img.src = 'https://api.gapple.pw/cors/optifine.php?id=' + username;
+	img.onerror = function() {
+		document.getElementById('optifine').src = 'notfound.png';
+	};
+
     document.getElementById('skin').src = 'https://mc-heads.net/body/' + uuid;
     document.getElementById('face').src = 'https://mc-heads.net/avatar/' + uuid;
     // update mc cape image
     if (typeof textureJSON === 'undefined' || textureJSON === null) {
-        document.getElementById('minecraft').src = "";
+        document.getElementById('minecraft').src = "notfound.png";
     } else {
     	var httpsCapeURL = textureJSON.url.replace(/http/g, 'https');
         document.getElementById('minecraft').src = httpsCapeURL;
@@ -137,6 +145,7 @@ $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
 
     		} else {
     		document.getElementById('status').innerHTML += '<br>' + 'Created at: ' + creaDate;
-   			}
+   			}  
     });
 });
+
