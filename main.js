@@ -22,11 +22,11 @@ $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
     // update html
     document.getElementById('username').innerHTML = username;
     document.getElementById('uuidcode dark9').innerHTML = trimmedUUID;
-    document.getElementById('optifine').src = 'https://api.gapple.pw/cors/optifine.php?id=' + username;
+    document.getElementById('optifine').src = 'https://optifine.net/capes/' + username + '.png';
 
     // checks if optifine cape exists
 	let img = document.createElement('img');
-	img.src = 'https://api.gapple.pw/cors/optifine.php?id=' + username;
+	img.src = 'https://optifine.net/capes/' + username + '.png';
 	img.onerror = function() {
 		document.getElementById('optifine').src = 'notfound.png';
 	};
