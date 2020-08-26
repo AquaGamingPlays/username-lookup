@@ -4,11 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./stylesheet.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/stylesheet.css" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="./main.js"></script>
-    <link rel="icon" href="icon.jpg">
+    <link rel="icon" href="assets/img/icon.jpg">
     <title>Username Lookup</title>
   </head>
   <body>
@@ -24,10 +23,11 @@
     <div class="container" style="text-align:center">
       <div class="row" style="text-align:center">
         <div id="skinbox" class="col-sm-4" style="text-align:center">
-          <h3>Skin Info</h3>
-          <img id="skin" width="180" height="433">
-          <p></p>
-          <img id="face" width="180" height="180">
+          <h3>Skin</h3>
+          <div id="skin_container" width="180" height="433"></div>
+          <!-- <p></p>
+          <img id="face" width="180" height="180"> !-->
+          <button class="btn btn-primary btn-sm" id="dark10" onClick="(walk.paused = !walk.paused)">Pause</button>
         </div>
         <div id="userbox" class="col-sm-4">
           <h3>User Info</h3>
@@ -53,5 +53,8 @@
     </div>
     <p style="text-align:center">Credit to <a href="https://mc-heads.net">MCHeads</a> for the Skin API, and <a href="https://github.com/Electroid/mojang-api">Electroid</a> for the amazing API endpoint!</p>
   </body>
-  <script src="./darkmode.js"></script>
+  <script src="assets/js/skinview3d.bundle.js"></script>
+  <script src="assets/js/skin_viewer_init.js"></script>
+  <script src="assets/js/darkmode.js"></script>
+  <script src="assets/js/main.js"></script>
 </html>
