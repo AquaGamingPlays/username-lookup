@@ -6,10 +6,10 @@ Many updates are going to come such as caching and username history lookup inste
 
 CREDITS:
 
-github.com/Electroid : Providing amazing API endpoint
+github.com/Electroid : Providing bundled api
 
-mc-heads.net : Providing Skin textures
+github.com/bs-community : Providing 3D skin viewing
 
 sessionserver.mojang.com : Providing legacy and demo status
 
-s.optifine.net : Providing Optifine cape textures
+optifine.net : Providing Optifine cape textures
