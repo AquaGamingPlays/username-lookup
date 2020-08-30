@@ -18,7 +18,6 @@ $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
     var history = JSON.stringify(data.username_history);
     var trimmedUUID = uuid.replace(/-/g, ''); // remove dashes from uuid with regex
     var capeJSON = data.textures.cape; // cape url stuff
-    var creaDate = data.created_at;
     
     // update html
     document.getElementById('username').innerHTML = username;
@@ -160,11 +159,61 @@ $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
             document.getElementById('status').innerHTML = "Unmigrated + " + demo; // add demo status
         	}
     	}
-    	    if (typeof creaDate === 'undefined' || creaDate === null) {
 
-    		} else {
-    		document.getElementById('status').innerHTML += '<br>' + 'Created at: ' + creaDate;
-   			}  
+
+
+        $.get("https://api.gapple.pw/creation/date.php?name=" + username).done(function(data) {
+            if (data.http_status_code == 200) {
+                var epoch = data.creation
+                if (epoch == '1263146631') {
+                    document.getElementById('status').innerHTML += '<br>' + 'Created Before: Jan 10, 2010'
+                } else {
+                    var creaDate = new Date(epoch*1000);
+                    var dayUTC = creaDate.getUTCDate();
+                    var monthUTC = creaDate.getUTCMonth();
+                    var yearUTC = creaDate.getUTCFullYear();
+                    if (monthUTC === 0) {
+                        var monthUTC = "Jan";
+                    }
+                    if (monthUTC === 1) {
+                        var monthUTC = "Feb";
+                    }
+                    if (monthUTC === 2) {
+                        var monthUTC = "Mar";
+                    }
+                    if (monthUTC === 3) {
+                        var monthUTC = "Apr";
+                    }
+                    if (monthUTC === 4) {
+                        var monthUTC = "May";
+                    }
+                    if (monthUTC === 5) {
+                        var monthUTC = "Jun";
+                    }
+                    if (monthUTC === 6) {
+                        var monthUTC = "Jul";
+                    }
+                    if (monthUTC === 7) {
+                        var monthUTC = "Aug";
+                    }
+                    if (monthUTC === 8) {
+                        var monthUTC = "Sep";
+                    }
+                    if (monthUTC === 9) {
+                        var monthUTC = "Oct";
+                    }
+                    if (monthUTC === 10) {
+                        var monthUTC = "Nov";
+                    }
+                    if (monthUTC === 11) {
+                        var monthUTC = "Dec";
+                    }
+                    document.getElementById('status').innerHTML += '<br>' + 'Created At: ' + monthUTC + ' ' + dayUTC + ', ' + yearUTC;
+                }
+            }
+
+
+        });
     });
 });
 
