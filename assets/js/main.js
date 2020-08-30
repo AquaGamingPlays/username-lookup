@@ -2,60 +2,63 @@
 // main functions and api calls for username lookup
 // copyright (c) tanpug 2020
 
+// variables
+var query = location.href.substring(location.href.indexOf("?lookup=") + 8); // get username that we want to look up
+var ratelimitedHTML = '<br>We\'re ratelimited, so we can\'t get the creation date. Try again later.'; // code 1003 / HTTP 429
+var takenHTML = 'The provided name isn\'t taken on any account.'; // code 1001
+var otherAccountHTML = 'Username was on another account before, can\'t get creation date.'; // code 1002
+var tooOldHTML = 'Account too old. Cannot get creation date.'; // code 1004
+var serverSideHTML = 'Server-side error caught when fetching creation date. Try again later.'; // code 1005 / HTTP 5xx
+var unmigratedHTML = 'Account unmigrated, unable to fetch creation date.'; // code 1006
+
 // auto-selects searchbar
-$(function()
-{
+$(function() {
     $('#searchbar').focus();
 });
-
-var query = location.href.substring(location.href.indexOf("?lookup=") + 8); // get username that we want to look up
 
 // user info stuff
 $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
     // initialize variables
-    var uuid = data.uuid;
-    var username = data.username;
-    var history = JSON.stringify(data.username_history);
+    var uuid = data.uuid; // account uuid
+    var username = data.username; // username
+    var history = JSON.stringify(data.username_history); // name history
     var trimmedUUID = uuid.replace(/-/g, ''); // remove dashes from uuid with regex
     var capeJSON = data.textures.cape; // cape url stuff
-    
+
     // update html
     document.getElementById('username').innerHTML = username;
     document.getElementById('uuidcode dark9').innerHTML = trimmedUUID;
-    document.getElementById('optifine').src = 'https://optifine.net/capes/' + username + '.png';
+    document.getElementById('optifine').src = 'https://optifine.net/capes/' + username + '.png'; // set the optifine cape image
 
     // checks if optifine cape exists
-	let img = document.createElement('img');
-	img.src = 'https://optifine.net/capes/' + username + '.png';
+    let img = document.createElement('img');
+    img.src = 'https://optifine.net/capes/' + username + '.png';
     var optifineExists = true;
-	img.onerror = function() {
-		document.getElementById('optifine').src = 'assets/img/notfound.png';
+    img.onerror = function() {
+        document.getElementById('optifine').src = 'assets/img/notfound.png';
         optifineExists = false;
-	};
+    };
 
     // update skin
     skinViewer.loadSkin('https://mc-heads.net/skin/' + uuid);
-    //document.getElementById('face').src = 'https://mc-heads.net/avatar/' + uuid; // update face
-    
+
     // update mc cape image normally
     if (typeof capeJSON === 'undefined' || capeJSON === null) {
-        document.getElementById('minecraft').src = "assets/img/notfound.png";
+        document.getElementById('minecraft').src = "assets/img/notfound.png"; // no cape :(
     } else {
-    	var capeIdentifier = capeJSON.url.replace('http://textures.minecraft.net/texture/', '');
+        var capeIdentifier = capeJSON.url.replace('http://textures.minecraft.net/texture/', ''); // just get the last part so we can feed it through proxy
         console.log(capeIdentifier);
         var httpsCapeURL = "https://api.gapple.pw/cors/textures.php?id=" + capeIdentifier;
         var capeExists = true;
-        document.getElementById('minecraft').src = httpsCapeURL;
+        document.getElementById('minecraft').src = httpsCapeURL; // set cape image
     }
 
     // update skin viewer cape image
     if (capeExists === true) { // we have normal vanilla cape
         skinViewer.loadCape(httpsCapeURL);
-    }
-    else if (optifineExists === true) { // user has an optifine cape
+    } else if (optifineExists === true) { // user has an optifine cape
         skinViewer.loadCape('https://api.gapple.pw/cors/optifine.php?id=' + username); // this CORS proxy doesn't error out if no cape is present, that's why we use both endpoints
-    }
-    else { // no cape :(
+    } else { // no cape :(
         skinViewer.loadCape(null);
     }
 
@@ -67,78 +70,10 @@ $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
         } else {
             // parse date properly
             var un = data.username_history[i].username; // username
-            var cd = data.username_history[i].changed_at; // changed time
-            var yr = cd.substring(0, 4);
-            var mnth = cd.substring(5, 7);
-            var dy = cd.substring(8, 10);
-            var tme = cd.substring(11, 19);
-
-            if (mnth === "01") {
-                var mnth = "Jan";
-            }
-            if (mnth === "02") {
-                var mnth = "Feb";
-            }
-            if (mnth === "03") {
-                var mnth = "Mar";
-            }
-            if (mnth === "04") {
-                var mnth = "Apr";
-            }
-            if (mnth === "05") {
-                var mnth = "May";
-            }
-            if (mnth === "06") {
-                var mnth = "Jun";
-            }
-            if (mnth === "07") {
-                var mnth = "Jul";
-            }
-            if (mnth === "08") {
-                var mnth = "Aug";
-            }
-            if (mnth === "09") {
-                var mnth = "Sep";
-            }
-            if (mnth === "10") {
-                var mnth = "Oct";
-            }
-            if (mnth === "11") {
-                var mnth = "Nov";
-            }
-            if (mnth === "12") {
-                var mnth = "Dec";
-            }
-            if (dy === "01") {
-                var dy = "1";
-            }
-            if (dy === "02") {
-                var dy = "2";
-            }
-            if (dy === "03") {
-                var dy = "3";
-            }
-            if (dy === "04") {
-                var dy = "4";
-            }
-            if (dy === "05") {
-                var dy = "5";
-            }
-            if (dy === "06") {
-                var dy = "6";
-            }
-            if (dy === "07") {
-                var dy = "7";
-            }
-            if (dy === "08") {
-                var dy = "8";
-            }
-            if (dy === "09") {
-                var dy = "9";
-            }
-
+            var cd = new Date(data.username_history[i].changed_at); // changed time
+            var parsed_cd = cd.toLocaleString('en-US'); // parse the date to look pretty
             // add date and old name
-            document.getElementById("history").innerHTML += [i] + ': ' + un + ' - ' + mnth + " " + dy + ', ' + yr + ', ' + tme + ' UTC' + '<br>';
+            document.getElementById("history").innerHTML += [i] + ': ' + un + ' - ' + parsed_cd + '<br>';
         }
     }
 
@@ -149,71 +84,82 @@ $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
         } else {
             var status = "Unmigrated"; // if legacy exists
         }
-        document.getElementById('status').innerHTML = status; // add migration status
+        document.getElementById('status').innerHTML = status + '<br>' + document.getElementById('status').innerHTML; // add migration status
 
         if (status === "Unmigrated") {
-        	if (data.demo == undefined) {
+            if (data.demo == undefined) { // nothing lol
 
-        	} else {
-            var demo = "Demo"; // if demo exists
-            document.getElementById('status').innerHTML = "Unmigrated + " + demo; // add demo status
-        	}
-    	}
-
-
-
-        $.get("https://api.gapple.pw/creation/date.php?name=" + username).done(function(data) {
-            if (data.http_status_code == 200) {
-                var epoch = data.creation
-                if (epoch == '1263146631') {
-                    document.getElementById('status').innerHTML += '<br>' + 'Created Before: Jan 10, 2010'
-                } else {
-                    var creaDate = new Date(epoch*1000);
-                    var dayUTC = creaDate.getUTCDate();
-                    var monthUTC = creaDate.getUTCMonth();
-                    var yearUTC = creaDate.getUTCFullYear();
-                    if (monthUTC === 0) {
-                        var monthUTC = "Jan";
-                    }
-                    if (monthUTC === 1) {
-                        var monthUTC = "Feb";
-                    }
-                    if (monthUTC === 2) {
-                        var monthUTC = "Mar";
-                    }
-                    if (monthUTC === 3) {
-                        var monthUTC = "Apr";
-                    }
-                    if (monthUTC === 4) {
-                        var monthUTC = "May";
-                    }
-                    if (monthUTC === 5) {
-                        var monthUTC = "Jun";
-                    }
-                    if (monthUTC === 6) {
-                        var monthUTC = "Jul";
-                    }
-                    if (monthUTC === 7) {
-                        var monthUTC = "Aug";
-                    }
-                    if (monthUTC === 8) {
-                        var monthUTC = "Sep";
-                    }
-                    if (monthUTC === 9) {
-                        var monthUTC = "Oct";
-                    }
-                    if (monthUTC === 10) {
-                        var monthUTC = "Nov";
-                    }
-                    if (monthUTC === 11) {
-                        var monthUTC = "Dec";
-                    }
-                    document.getElementById('status').innerHTML += '<br>' + 'Created At: ' + monthUTC + ' ' + dayUTC + ', ' + yearUTC;
-                }
+            } else {
+                var demo = "Demo"; // if demo exists
+                document.getElementById('status').innerHTML = "Unmigrated + " + demo; // add demo status
             }
-
-
-        });
+        } else {
+            document.getElementById('dark11').style.display = '';
+        }
     });
 });
 
+// removes an element from the document
+function removeElement(elementId) {
+    var element = document.getElementById(elementId);
+    element.parentNode.removeChild(element);
+}
+
+// replace html from an element
+function replaceHTML(elementId, HTMLToReplace) {
+    var element = document.getElementById(elementId);
+    element.innerHTML = element.innerHTML.replace(HTMLToReplace, '') + HTMLToReplace;
+}
+
+// remove html from an element
+function removeHTML(elementId, HTMLToRemove) {
+    var element = document.getElementById(elementId);
+    element.innerHTML = element.innerHTML.replace(HTMLToRemove, '');
+}
+
+// finds creation date of an account
+function creation(username) {
+    $.get("https://api.gapple.pw/creation/date.php?name=" + username)
+        .done(function(data) { // get creation date (IF THE ACCOUNT IS NOT UNMIGRATED)
+            if (data.http_status_code == 200) { // we're good!
+                var epoch = data.creation;
+                if (epoch == 1263146631) {
+                    removeHTML('status', ratelimitedHTML); // just in case
+                    removeHTML('status', serverSideHTML); // just in case
+                    document.getElementById('status').innerHTML += 'Created before: Jan 10, 2010 (although this is the date in Mojang\'s system)';
+                } else {
+                    var creaDate = new Date(epoch * 1000);
+                    var parsedCreaDate = creaDate.toLocaleString('en-US'); // parse the date to look pretty
+                    removeHTML('status', ratelimitedHTML); // just in case
+                    removeHTML('status', serverSideHTML); // just in case
+                    document.getElementById('status').innerHTML += 'Created at: ' + parsedCreaDate;
+                }
+                removeElement('dark11');
+            }
+        })
+        .fail(function(data) { // there was an error (not sure why we need responseJSON for this)
+            if (data.responseJSON.http_status_code == 429) { // we're ratelimited
+                replaceHTML('status', ratelimitedHTML);
+            } else if (data.responseJSON.http_status_code == 404) { // other error
+                if (data.responseJSON.error_code == 1001) { // doesn't exist
+                    document.getElementById('status').innerHTML += takenHTML;
+                    removeElement('dark11');
+                } else if (data.responseJSON.error_code == 1002) { // taken on another account before
+                    document.getElementById('status').innerHTML += otherAccountHTML;
+                    removeElement('dark11');
+                } else if (data.responseJSON.error_code == 1004) { // too old
+                    document.getElementById('status').innerHTML += tooOldHTML;
+                    removeElement('dark11');
+                } else if (data.responseJSON.error_code == 1005) { // server side issue
+                    removeHTML('status', serverSideHTML);
+                    document.getElementById('status').innerHTML += serverSideHTML;
+                } else if (data.responseJSON.error_code == 1006) { // unmigrated
+                    document.getElementById('status').innerHTML += unmigratedHTML;
+                    removeElement('dark11');
+                }
+            } else { // server-side issue (most likely), HTTP 5xx
+                replaceHTML('status', serverSideHTML);
+                document.getElementById('status').innerHTML += serverSideHTML;
+            }
+        });
+}

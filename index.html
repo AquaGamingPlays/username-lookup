@@ -19,7 +19,7 @@
       <button type="submit"><i class="fa fa-search"></i></button>
     </form>
     <p></p>
-    <p class="center"><button class="btn btn-primary btn-sm" id="dark4" onclick="dmToggle()">Toggle dark mode</button></p>
+    <p class="center"><button class="btn btn-primary btn-sm" id="dark4" onClick="dmToggle()">Toggle dark mode</button></p>
     <div class="container" style="text-align:center">
       <div class="row" style="text-align:center">
         <div id="skinbox" class="col-sm-4" style="text-align:center">
@@ -33,7 +33,7 @@
           <h3>User Info</h3>
           <ul id="dark" class="list-group" style="text-align:center">
             <li id="username" class="list-group-item"></li>
-            <li id="status" class="list-group-item"></li>
+            <li id="status" class="list-group-item"><button class="btn btn-primary btn-sm" id="dark11" onClick="creation(document.getElementById('username').innerHTML)" style="display: none;">Find Creation Date</button></li>
             <li id="uuid" class="list-group-item"><code id="uuidcode dark9"></code></li>
             <li id="history" class="list-group-item"></li>
           </ul>
@@ -54,6 +54,6 @@
   </body>
   <script src="assets/js/skinview3d.bundle.js"></script>
   <script src="assets/js/skin_viewer_init.js"></script>
-  <script src="assets/js/darkmode.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/darkmode.js"></script>
 </html>
