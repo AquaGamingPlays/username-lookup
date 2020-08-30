@@ -6,6 +6,8 @@ Many updates are going to come such as caching and username history lookup inste
 
 CREDITS:
 
+api.gapple.pw (un & MCBYT) : Providing CORS stuff, and creation date api
+
 github.com/Electroid : Providing bundled api
 
 github.com/bs-community : Providing 3D skin viewing
