@@ -3,7 +3,7 @@ Username Lookup for Minecraft.
 
 Site: lookup.tanpug.rocks
 
-####PLANS:
+#### PLANS:
 
 User caching
 
@@ -15,7 +15,7 @@ Fix arms clipping through cape and arms moving outward and inward slightly
 
 Allow usernames with special characters to be looked up
 
-####CREDITS:
+#### CREDITS:
 
 api.gapple.pw (un & MCBYT) : Providing CORS stuff, and creation date api
 
