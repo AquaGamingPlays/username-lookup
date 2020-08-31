@@ -2,9 +2,20 @@
 Username Lookup for Minecraft.
 
 Site: lookup.tanpug.rocks
-Many updates are going to come such as caching and username history lookup instead of only user lookup.
 
-CREDITS:
+####PLANS:
+
+User caching
+
+Minecraft Cape caching
+
+Seeing every cached user that has had a name instead of only seeing the current user with the requested name
+
+Fix arms clipping through cape and arms moving outward and inward slightly
+
+Allow usernames with special characters to be looked up
+
+####CREDITS:
 
 api.gapple.pw (un & MCBYT) : Providing CORS stuff, and creation date api
 
