@@ -6,7 +6,7 @@
 var query = location.href.substring(location.href.indexOf("?lookup=") + 8); // get username that we want to look up
 var ratelimitedHTML = '<br>We\'re ratelimited, so we can\'t get the creation date. Try again later.'; // code 1003 / HTTP 429
 var takenHTML = 'The provided name isn\'t taken on any account.'; // code 1001
-var otherAccountHTML = 'Username was on another account before, can\'t get creation date.'; // code 1002
+var otherAccountHTML = 'Username was on another account or on the same account multiple times, can\'t get creation date.'; // code 1002
 var tooOldHTML = 'Account too old. Cannot get creation date.'; // code 1004
 var serverSideHTML = 'Server-side error caught when fetching creation date. Try again later.'; // code 1005 / HTTP 5xx
 var unmigratedHTML = 'Account unmigrated, unable to fetch creation date.'; // code 1006
@@ -28,7 +28,6 @@ $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
     // update html
     document.getElementById('username').innerHTML = username;
     document.getElementById('uuidcode dark9').innerHTML = trimmedUUID;
-    document.getElementById('optifine').src = 'https://optifine.net/capes/' + username + '.png'; // set the optifine cape image
 
     // checks if optifine cape exists
     let img = document.createElement('img');
@@ -38,6 +37,9 @@ $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
         document.getElementById('optifine').src = 'assets/img/notfound.png';
         optifineExists = false;
     };
+    if (optifineExists === true) {
+    	document.getElementById('optifine').src = 'https://optifine.net/capes/' + username + '.png'; // set the optifine cape image
+    }
 
     // update skin
     skinViewer.loadSkin('https://mc-heads.net/skin/' + uuid);
