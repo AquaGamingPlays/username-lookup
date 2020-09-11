@@ -17,7 +17,7 @@ $(function() {
 });
 
 // user info stuff
-$.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
+$.get("https://api.gapple.pw/cors/ashcon/" + query).done(function(data) {
     // initialize variables
     var uuid = data.uuid; // account uuid
     var username = data.username; // username
@@ -50,7 +50,7 @@ $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
     } else {
         var capeIdentifier = capeJSON.url.replace('http://textures.minecraft.net/texture/', ''); // just get the last part so we can feed it through proxy
         console.log(capeIdentifier);
-        var httpsCapeURL = "https://api.gapple.pw/cors/textures.php?id=" + capeIdentifier;
+        var httpsCapeURL = "https://api.gapple.pw/cors/textures/" + capeIdentifier;
         var capeExists = true;
         document.getElementById('minecraft').src = httpsCapeURL; // set cape image
     }
@@ -59,7 +59,7 @@ $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
     if (capeExists === true) { // we have normal vanilla cape
         skinViewer.loadCape(httpsCapeURL);
     } else if (optifineExists === true) { // user has an optifine cape
-        skinViewer.loadCape('https://api.gapple.pw/cors/optifine.php?id=' + username); // this CORS proxy doesn't error out if no cape is present, that's why we use both endpoints
+        skinViewer.loadCape('https://api.gapple.pw/cors/optifine/' + username); // this CORS proxy doesn't error out if no cape is present, that's why we use both endpoints
     } else { // no cape :(
         skinViewer.loadCape(null);
     }
@@ -80,7 +80,7 @@ $.get("https://api.gapple.pw/cors/ashcon.php?id=" + query).done(function(data) {
     }
 
     // get migration and demo status
-    $.get("https://api.gapple.pw/cors/profile.php?id=" + trimmedUUID).done(function(data) {
+    $.get("https://api.gapple.pw/cors/profile/" + trimmedUUID).done(function(data) {
         if (data.legacy == undefined) {
             var status = "Migrated"; // if legacy doesn't exist
         } else {
@@ -121,7 +121,7 @@ function removeHTML(elementId, HTMLToRemove) {
 
 // finds creation date of an account
 function creation(username) {
-    $.get("https://api.gapple.pw/creation/date.php?name=" + username)
+    $.get("https://api.gapple.pw/creation/" + username)
         .done(function(data) { // get creation date (IF THE ACCOUNT IS NOT UNMIGRATED)
             if (data.http_status_code == 200) { // we're good!
                 var epoch = data.creation;
