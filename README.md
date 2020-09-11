@@ -1,5 +1,5 @@
-# Username-Lookup
-Username Lookup for Minecraft.
+# username-lookup
+username lookup for Minecraft.
 
 Site: lookup.tanpug.rocks
 
@@ -16,8 +16,6 @@ Fix arms clipping through cape and arms moving outward and inward slightly
 Allow usernames with special characters to be looked up
 
 #### CREDITS:
-
-api.gapple.pw (un & MCBYT) : Providing CORS stuff, and creation date api
 
 github.com/Electroid : Providing bundled api
 
