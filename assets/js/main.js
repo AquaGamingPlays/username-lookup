@@ -49,7 +49,6 @@ $.get("https://api.gapple.pw/cors/ashcon/" + query).done(function(data) {
         document.getElementById('minecraft').src = "assets/img/notfound.png"; // no cape :(
     } else {
         var capeIdentifier = capeJSON.url.replace('http://textures.minecraft.net/texture/', ''); // just get the last part so we can feed it through proxy
-        console.log(capeIdentifier);
         var httpsCapeURL = "https://api.gapple.pw/cors/textures/" + capeIdentifier;
         var capeExists = true;
         document.getElementById('minecraft').src = httpsCapeURL; // set cape image
