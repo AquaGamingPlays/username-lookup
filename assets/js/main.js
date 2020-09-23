@@ -120,11 +120,13 @@ function removeHTML(elementId, HTMLToRemove) {
 }
 
 // finds creation date of an account
+
 function creation(username) {
+    removeElement('dark11');
     $.get("https://api.gapple.pw/creation/" + username)
         .done(function(data) { // get creation date (IF THE ACCOUNT IS NOT UNMIGRATED)
-            if (data.http_status_code == 200) { // we're good!
-                var epoch = data.creation;
+        if (data.http_status_code == 200) { // we're good!
+            var epoch = data.creation;
                 if (epoch == 1263146631) {
                     removeHTML('status', ratelimitedHTML); // just in case
                     removeHTML('status', serverSideHTML); // just in case
@@ -136,13 +138,13 @@ function creation(username) {
                     removeHTML('status', serverSideHTML); // just in case
                     document.getElementById('status').innerHTML += 'Created at: ' + parsedCreaDate;
                 }
-                removeElement('dark11');
             }
         })
         .fail(function(data) { // there was an error (not sure why we need responseJSON for this)
-            if (data.responseJSON.http_status_code == 429) { // we're ratelimited
-                replaceHTML('status', ratelimitedHTML);
-            } else if (data.responseJSON.http_status_code == 404) { // other error
+                if (data.responseJSON.http_status_code == 429) { // we're ratelimited
+                    replaceHTML('status', ratelimitedHTML);
+                    document.getElementById('status').innerHTML += '<button class="btn btn-primary btn-sm" id="dark11" onClick="creation(document.getElementById(\'username\').innerHTML)" style="display: none;">Find Creation Date</button>'
+                } else if (data.responseJSON.http_status_code == 404) { // other error
                 if (data.responseJSON.error_code == 1001) { // doesn't exist
                     document.getElementById('status').innerHTML += takenHTML;
                     removeElement('dark11');
@@ -165,3 +167,4 @@ function creation(username) {
             }
         });
 }
+
