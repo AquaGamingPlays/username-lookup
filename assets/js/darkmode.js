@@ -28,8 +28,12 @@ function darkMode() {
     y.classList.toggle("dm2")
     var y = document.getElementById("dark10");
     y.classList.toggle("dm1")
-    var y = document.getElementById("dark11");
-    y.classList.toggle("dm1")
+    if (document.getElementById('dark11') ==null) {
+        
+    } else {
+        var y = document.getElementById("dark11");
+        y.classList.toggle("dm1")
+    }
     var y = document.getElementById("history");
     y.classList.toggle("dm1")
 }
