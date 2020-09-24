@@ -1,7 +1,8 @@
 // simple initializer script for the skin viewer
 // copied blatantly (and modified) from https://github.com/bs-community/skinview3d
 
-let skinViewer = new skinview3d.FXAASkinViewer(document.getElementById("skin_container"), {
+let skinViewer = new skinview3d.FXAASkinViewer({
+    canvas: document.getElementById("skin_container"),
     width: 250,
     height: 433,
     skin: null // show NO skin normally
