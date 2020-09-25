@@ -38,7 +38,7 @@ $.get("https://api.gapple.pw/cors/ashcon/" + query).done(function(data) {
         optifineExists = false;
     };
     if (optifineExists === true) {
-    	document.getElementById('optifine').src = 'https://optifine.net/capes/' + username + '.png'; // set the optifine cape image
+        document.getElementById('optifine').src = 'https://optifine.net/capes/' + username + '.png'; // set the optifine cape image
     }
 
     // update skin
@@ -122,10 +122,12 @@ function removeHTML(elementId, HTMLToRemove) {
 
 function creation(username) {
     removeElement('dark11');
+    document.getElementById('status').innerHTML += 'Loading...';
     $.get("https://api.gapple.pw/creation/" + username)
         .done(function(data) { // get creation date (IF THE ACCOUNT IS NOT UNMIGRATED)
-        if (data.http_status_code == 200) { // we're good!
-            var epoch = data.creation;
+            document.getElementById('status').innerHTML.replace('Loading...');
+            if (data.http_status_code == 200) { // we're good!
+                var epoch = data.creation;
                 if (epoch == 1263146631) {
                     removeHTML('status', ratelimitedHTML); // just in case
                     removeHTML('status', serverSideHTML); // just in case
@@ -140,10 +142,11 @@ function creation(username) {
             }
         })
         .fail(function(data) { // there was an error (not sure why we need responseJSON for this)
-                if (data.responseJSON.http_status_code == 429) { // we're ratelimited
-                    replaceHTML('status', ratelimitedHTML);
-                    document.getElementById('status').innerHTML += '<button class="btn btn-primary btn-sm" id="dark11" onClick="creation(document.getElementById(\'username\').innerHTML)" style="display: none;">Find Creation Date</button>'
-                } else if (data.responseJSON.http_status_code == 404) { // other error
+            document.getElementById('status').innerHTML.replace('Loading...');
+            if (data.responseJSON.http_status_code == 429) { // we're ratelimited
+                replaceHTML('status', ratelimitedHTML);
+                document.getElementById('status').innerHTML += '<button class="btn btn-primary btn-sm" id="dark11" onClick="creation(document.getElementById(\'username\').innerHTML)" style="display: none;">Find Creation Date</button>'
+            } else if (data.responseJSON.http_status_code == 404) { // other error
                 if (data.responseJSON.error_code == 1001) { // doesn't exist
                     document.getElementById('status').innerHTML += takenHTML;
                     removeElement('dark11');
@@ -166,4 +169,3 @@ function creation(username) {
             }
         });
 }
-
