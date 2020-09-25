@@ -125,7 +125,7 @@ function creation(username) {
     document.getElementById('status').innerHTML += 'Loading...';
     $.get("https://api.gapple.pw/creation/" + username)
         .done(function(data) { // get creation date (IF THE ACCOUNT IS NOT UNMIGRATED)
-            document.getElementById('status').innerHTML.replace('Loading...', '');
+            document.getElementById('status').innerHTML = document.getElementById('status').innerHTML.replace('Loading...', '');
             if (data.http_status_code == 200) { // we're good!
                 var epoch = data.creation;
                 if (epoch == 1263146631) {
@@ -142,7 +142,7 @@ function creation(username) {
             }
         })
         .fail(function(data) { // there was an error (not sure why we need responseJSON for this)
-            document.getElementById('status').innerHTML.replace('Loading...', '');
+            document.getElementById('status').innerHTML = document.getElementById('status').innerHTML.replace('Loading...', '');
             if (data.responseJSON.http_status_code == 429) { // we're ratelimited
                 replaceHTML('status', ratelimitedHTML);
                 document.getElementById('status').innerHTML += '<button class="btn btn-primary btn-sm" id="dark11" onClick="creation(document.getElementById(\'username\').innerHTML)" style="display: none;">Find Creation Date</button>'
