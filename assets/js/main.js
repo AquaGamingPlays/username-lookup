@@ -25,6 +25,11 @@ $.get("https://api.gapple.pw/cors/ashcon/" + query).done(function(data) {
     var trimmedUUID = uuid.replace(/-/g, ''); // remove dashes from uuid with regex
     var capeJSON = data.textures.cape; // cape url stuff
 
+    // discord embed stuff
+    document.getElementById("og_description").content = 'View the results for the user ' + username + '!';
+    document.getElementById("og_url").content = 'https://lookup.tanpug.rocks/?lookup=' + query;
+    document.getElementById("og_image").content = 'https://mc-heads.net/body/' + username;
+    
     // update html
     document.getElementById('username').innerHTML = username;
     document.getElementById('uuidcode dark9').innerHTML = trimmedUUID;
