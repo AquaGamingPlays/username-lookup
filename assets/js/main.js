@@ -24,12 +24,12 @@ $.get("https://api.gapple.pw/cors/ashcon/" + query).done(function(data) {
     var history = JSON.stringify(data.username_history); // name history
     var trimmedUUID = uuid.replace(/-/g, ''); // remove dashes from uuid with regex
     var capeJSON = data.textures.cape; // cape url stuff
+    var skinURL = data.textures.skin.url; // the skin url (no more mc-heads)
 
     // discord embed stuff
     document.getElementById("description").content = 'View the results for the user ' + username + '!';
     document.getElementById("og_description").content = 'View the results for the user ' + username + '!';
     document.getElementById("og_url").content = 'https://lookup.tanpug.rocks/?lookup=' + query;
-    document.getElementById("og_image").content = 'https://mc-heads.net/body/' + username;
 
     // update html
     document.getElementById('username').innerHTML = username;
@@ -48,13 +48,24 @@ $.get("https://api.gapple.pw/cors/ashcon/" + query).done(function(data) {
     }
 
     // update skin
-    skinViewer.loadSkin('https://mc-heads.net/skin/' + uuid);
+    if (skinURL.includes("http://assets.mojang.com/SkinTemplates/") === true) { // default skins, different URL
+        var skinIdentifier = skinURL.replace("http://assets.mojang.com/SkinTemplates/", "").replace(".png", "");
+        if (skinIdentifier === "alex") {
+            skinURL = "https://skintemplates.mcapi.workers.dev/skin/alex"; // default Alex skin proxied through our endpoints
+        } else {
+            skinURL = "https://skintemplates.mcapi.workers.dev/skin/steve"; // default Steve skin proxied through our endpoints
+        }
+    } else { // normal URL
+        var skinIdentifier = skinURL.replace("http://textures.minecraft.net/texture/", ""); // just get the last part so we can feed it through proxy
+        skinURL = "https://api.gapple.pw/cors/textures/" + skinIdentifier;
+    }
+    skinViewer.loadSkin(skinURL); // load the skin
 
     // update mc cape image normally
     if (typeof capeJSON === 'undefined' || capeJSON === null) {
         document.getElementById('minecraft').src = "assets/img/notfound.png"; // no cape :(
     } else {
-        var capeIdentifier = capeJSON.url.replace('http://textures.minecraft.net/texture/', ''); // just get the last part so we can feed it through proxy
+        var capeIdentifier = capeJSON.url.replace("http://textures.minecraft.net/texture/", ""); // just get the last part so we can feed it through proxy
         var httpsCapeURL = "https://api.gapple.pw/cors/textures/" + capeIdentifier;
         var capeExists = true;
         document.getElementById('minecraft').src = httpsCapeURL; // set cape image
