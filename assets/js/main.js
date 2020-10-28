@@ -49,16 +49,16 @@ $.get("https://api.gapple.pw/cors/ashcon/" + query).done(function(data) {
 
     // update skin
     if (skinURL.includes("http://assets.mojang.com/SkinTemplates/") === true) { // default skins, different URL
-        var skinIdentifier = skinURL.replace("http://assets.mojang.com/SkinTemplates/", "").replace(".png", "");
-        if (skinIdentifier === "alex") {
-            skinURL = "https://skintemplates.mcapi.workers.dev/skin/alex"; // default Alex skin proxied through our endpoints
+        var skinModel = skinURL.replace("http://assets.mojang.com/SkinTemplates/", "").replace(".png", "");
+        if (skinModel === "alex") {
+            var skinIdentifier = "83cee5ca6afcdb171285aa00e8049c297b2dbeba0efb8ff970a5677a1b644032"; // alex texture ID
         } else {
-            skinURL = "https://skintemplates.mcapi.workers.dev/skin/steve"; // default Steve skin proxied through our endpoints
+            var skinIdentifier = "4c7b0468044bfecacc43d00a3a69335a834b73937688292c20d3988cae58248d"; // steve texture ID
         }
     } else { // normal URL
         var skinIdentifier = skinURL.replace("http://textures.minecraft.net/texture/", ""); // just get the last part so we can feed it through proxy
-        skinURL = "https://api.gapple.pw/cors/textures/" + skinIdentifier;
     }
+    skinURL = "https://api.gapple.pw/cors/textures/" + skinIdentifier;
     skinViewer.loadSkin(skinURL); // load the skin
 
     // update mc cape image normally
