@@ -51,9 +51,9 @@ $.get("https://api.gapple.pw/cors/ashcon/" + query).done(function(data) {
     if (skinURL.includes("http://assets.mojang.com/SkinTemplates/") === true) { // default skins, different URL
         var skinModel = skinURL.replace("http://assets.mojang.com/SkinTemplates/", "").replace(".png", "");
         if (skinModel === "alex") {
-            var skinIdentifier = "83cee5ca6afcdb171285aa00e8049c297b2dbeba0efb8ff970a5677a1b644032"; // alex texture ID
+            var skinIdentifier = "3b60a1f6d562f52aaebbf1434f1de147933a3affe0e764fa49ea057536623cd3"; // alex texture ID
         } else {
-            var skinIdentifier = "4c7b0468044bfecacc43d00a3a69335a834b73937688292c20d3988cae58248d"; // steve texture ID
+            var skinIdentifier = "1a4af718455d4aab528e7a61f86fa25e6a369d1768dcb13f7df319a713eb810b"; // steve texture ID
         }
     } else { // normal URL
         var skinIdentifier = skinURL.replace("http://textures.minecraft.net/texture/", ""); // just get the last part so we can feed it through proxy
