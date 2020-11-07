@@ -17,7 +17,7 @@ $(function() {
 });
 
 // user info stuff
-$.get("https://api.gapple.pw/cors/ashcon/" + query).done(function(data) {
+$.get("https://api.ashcon.app/mojang/v2/user/" + query).done(function(data) {
     // initialize variables
     var uuid = data.uuid; // account uuid
     var username = data.username; // username
@@ -34,6 +34,14 @@ $.get("https://api.gapple.pw/cors/ashcon/" + query).done(function(data) {
     // update html
     document.getElementById('username').innerHTML = username;
     document.getElementById('uuidcode dark9').innerHTML = trimmedUUID;
+    
+    // migration status checks
+    if (data.legacy == undefined) {
+        var status = "Migrated"; // if legacy doesn't exist
+    } else {
+        var status = "Unmigrated"; // if legacy exists
+    }
+    document.getElementById('status').innerHTML = status + '<br>' + document.getElementById('status').innerHTML; // add migration status
 
     // checks if optifine cape exists
     let img = document.createElement('img');
@@ -94,19 +102,19 @@ $.get("https://api.gapple.pw/cors/ashcon/" + query).done(function(data) {
             document.getElementById("history").innerHTML += [i] + ': ' + un + ' - ' + parsed_cd + '<br>';
         }
     }
-
-    // get migration and demo status
-    $.get("https://api.gapple.pw/cors/profile/" + trimmedUUID).done(function(data) {
-        if (data.legacy == undefined) {
-            var status = "Migrated"; // if legacy doesn't exist
-        } else {
-            var status = "Unmigrated"; // if legacy exists
+    
+    // ashcon creation dates
+    if (data.created_at == undefined) { // nothing lol
+    } else {
+        if (data.created_at != null) { // not unmigrated
+            document.getElementById('status').innerHTML += 'Created at: ' + data.created_at;
         }
-        document.getElementById('status').innerHTML = status + '<br>' + document.getElementById('status').innerHTML; // add migration status
+    }
 
+    // get demo status
+    $.get("https://api.gapple.pw/cors/profile/" + trimmedUUID).done(function(data) {
         if (status === "Unmigrated") {
             if (data.demo == undefined) { // nothing lol
-
             } else {
                 var demo = "Demo"; // if demo exists
                 document.getElementById('status').innerHTML = "Unmigrated + " + demo; // add demo status
@@ -136,7 +144,7 @@ function removeHTML(elementId, HTMLToRemove) {
 }
 
 // finds creation date of an account
-
+// this code will be kept here since there's a chance WEB-3367 will be fixed
 function creation(username) {
     removeElement('dark11');
     document.getElementById('status').innerHTML += 'Loading...';
