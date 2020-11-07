@@ -107,7 +107,7 @@ $.get("https://api.ashcon.app/mojang/v2/user/" + query).done(function(data) {
     if (data.created_at == undefined) { // nothing lol
     } else {
         if (data.created_at != null) { // not unmigrated
-            document.getElementById('status').innerHTML += 'Created at: ' + data.created_at;
+            document.getElementById('status').innerHTML += '(Ashcon) Created at: ' + data.created_at;
         }
     }
 
