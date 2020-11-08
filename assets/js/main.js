@@ -89,17 +89,17 @@ $.get("https://api.ashcon.app/mojang/v2/user/" + query).done(function(data) {
     }
 
     // name history stuff
-    for (var i = 0; i < data.username_history.length; i++) { // loop through name history
+    for (var i = data.username_history.length - 1; i >= 0; i--) { // loop through name history (REVERSED)
         if (i === 0) { // add original name
             var un = data.username_history[i].username;
-            document.getElementById("history").innerHTML += '0: ' + un + ' (Original Name)' + '<br>';
+            document.getElementById("history").innerHTML += '[<b>0</b>]: ' + un + ' (Original Name)' + '<br>';
         } else {
             // parse date properly
             var un = data.username_history[i].username; // username
             var cd = new Date(data.username_history[i].changed_at); // changed time
             var parsed_cd = cd.toLocaleString('en-US'); // parse the date to look pretty
             // add date and old name
-            document.getElementById("history").innerHTML += [i] + ': ' + un + ' - ' + parsed_cd + '<br>';
+            document.getElementById("history").innerHTML += '[<b>' + [i] + '</b>]' + ': ' + un + ' - ' + parsed_cd + '<br>';
         }
     }
     
@@ -107,7 +107,7 @@ $.get("https://api.ashcon.app/mojang/v2/user/" + query).done(function(data) {
     if (data.created_at == undefined) { // nothing lol
     } else {
         if (data.created_at != null) { // not unmigrated
-            document.getElementById('status').innerHTML += '(Ashcon) Created at: ' + data.created_at + ' <sup><span title="Creation dates are inaccurate for a lot of accounts due to a breaking change on Mojang\'s end. Please yell at Mojang (WEB-3367) in order for accurate creation dates to return.">[hover for info!]</span></sup>';
+            document.getElementById('status').innerHTML += 'Created at: ' + data.created_at + ' <sup><span title="Creation dates are inaccurate for a lot of accounts due to a breaking change on Mojang\'s end. We are currently fetching dates from Ashcon\'s API. Please yell at Mojang (WEB-3367) in order for accurate creation dates to return.">[may be inaccurate]</span></sup>';
         }
     }
 
