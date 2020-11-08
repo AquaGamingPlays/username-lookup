@@ -107,7 +107,7 @@ $.get("https://api.ashcon.app/mojang/v2/user/" + query).done(function(data) {
     if (data.created_at == undefined) { // nothing lol
     } else {
         if (data.created_at != null) { // not unmigrated
-            document.getElementById('status').innerHTML += '(Ashcon) Created at: ' + data.created_at;
+            document.getElementById('status').innerHTML += '(Ashcon) Created at: ' + data.created_at + '<sup><span title="Due to how Ashcon\'s API (what we use) fetches creation dates, this date may be inaccurate. Please take that into account when reading our creation dates. Please yell at Mojang (WEB-3367) in order for accurate creation dates to return.">[hover for more info!]</span></sup>';
         }
     }
 
