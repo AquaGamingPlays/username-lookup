@@ -5,11 +5,11 @@
 if (query == undefined) {} else {
     // WARNING: THIS USES NAMEMC!!
     // SWITCH TO BLOCKCHECK ASAP!!
-    $.get("https://api.nathan.cx/check/" + query).done(function(data) {
+    $.get("https://blockcheck.mcapi.workers.dev/name/" + query).done(function(data) {
         // migration status checks
         if (data.status == "blocked") {
             var alert_mode = "alert-warning"
-            var name_status = '<p>The username ' + query + ' is currently blocked. Usernames can be blocked by username snipers or via an API request (unless the person who blocked the name re-blocks it, it will only be blocked for 24 hours). Usernames can also be permanently blocked by Mojang\'s username filter. Usernames can also <i>appear</i> blocked if they are pseudo-hard-deleted, but you can\'t check if this is the case unless you have the account\'s UUID.</p>'; // if name is blocked
+            var name_status = '<p>The username ' + query + ' is currently blocked <b>OR</b> dropping. Usernames can be blocked by username snipers or via an API request (unless the person who blocked the name re-blocks it, it will only be blocked for 24 hours). Usernames can also be permanently blocked by Mojang\'s username filter. Usernames can also <i>appear</i> blocked if they are pseudo-hard-deleted, but you can\'t check if this is the case unless you have the account\'s UUID.</p>'; // if name is blocked
         } else if (data.status == "taken") {
             removeElement('alertbox'); // get rid of the alert
             new_html = '<div class="container" style="text-align:center"><div class="row" style="text-align:center"><div id="skinbox" class="col-sm-4" style="text-align:center"><h3>Skin</h3><div id="skin_container" width="180" height="433"></div><button class="btn btn-primary btn-sm" id="dark10" onClick="(walk.paused = !walk.paused)">Pause</button></div><div id="userbox" class="col-sm-4"><h3>User Info</h3><ul id="dark" class="list-group" style="text-align:center"><li id="username" class="list-group-item"></li><li id="status" class="list-group-item"><!-- <button class="btn btn-primary btn-sm" id="dark11" onClick="creation(document.getElementById(\'username\').innerHTML)" style="display: none;">Find Creation Date</button> !--></li><li id="uuid" class="list-group-item"><code id="uuidcode dark9"></code></li><li id="history" class="list-group-item"></li></ul></div><div id="capebox" class="col-sm-4"><h3>Cape Info</h3><ul id="dark6" class="list-group" style="text-align:center"><li id="dark7" class="list-group-item">Minecraft Cape<br/><img id="minecraft" width="92" height="44"></li><li id="dark8" class="list-group-item">OptiFine Cape<br/><img id="optifine" width="92" height="44"></li></ul></div></div></div>';
