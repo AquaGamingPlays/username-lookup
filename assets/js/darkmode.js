@@ -19,21 +19,7 @@ function darkMode() {
     } catch (err) {
         console.log("error toggling dark mode for a class")
     }
-    try {
-        var y = document.getElementById("uuidcode dark9");
-        y.classList.toggle("dm2")
-    } catch (err) {
-        console.log("error toggling dark mode for a class")
-    }
-    try {
-        var y = document.getElementById("dark10");
-        y.classList.toggle("dm1")
-    } catch (err) {
-        console.log("error toggling dark mode for a class")
-    }
-    if (document.getElementById('dark11') == null) {
-
-    } else {
+    if (document.getElementById('dark11') == null) {} else {
         try {
             var y = document.getElementById("dark11");
             y.classList.toggle("dm1")
@@ -88,6 +74,18 @@ function darkMode_newHTML() {
     }
     try {
         var y = document.getElementById("dark8");
+        y.classList.toggle("dm1")
+    } catch (err) {
+        console.log("error toggling dark mode for a class")
+    }
+    try {
+        var y = document.getElementById("uuidcode dark9");
+        y.classList.toggle("dm2")
+    } catch (err) {
+        console.log("error toggling dark mode for a class")
+    }
+    try {
+        var y = document.getElementById("dark10");
         y.classList.toggle("dm1")
     } catch (err) {
         console.log("error toggling dark mode for a class")
