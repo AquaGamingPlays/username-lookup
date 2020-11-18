@@ -1,7 +1,7 @@
 # Username Lookup
 Username lookup for Minecraft.
 
-This is plain HTML/CSS/JS, with a bit of added jQuery. Everything is done on the client-side. All requests are passed through to our [gapple](https://api.gapple.pw) endpoints for CORS reasons but all goes through either [Ashcon's API](https://github.com/Electroid/mojang-api) or through the normal Mojang API.
+This is plain HTML/CSS/JS, with a bit of added jQuery and Bootstrap. Everything is done on the client-side. Most / all requests are passed through to our [gapple](https://api.gapple.pw) endpoints for CORS reasons but all goes through either [Ashcon's API](https://github.com/Electroid/mojang-api) or through the normal Mojang API.
 
 ### Future plans
 - Rewrite in Python (templating, Flask, fetch everything server-side)
@@ -9,7 +9,6 @@ This is plain HTML/CSS/JS, with a bit of added jQuery. Everything is done on the
 - Cape caching
 - Seeing every cached user that has had a name instead of only being able to view the current user with the specified name
 - Allow invalid usernames to be searched
-- Pseudo-hard-deleted account support by UUID (display a page where you can optionally look up the user if they are pseudo-hard-deleted via [PHDCheck](https://github.com/88/phdcheck))
 - View a user's LabyMod cape
 
 ### Credits
