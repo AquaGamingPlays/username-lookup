@@ -47,6 +47,15 @@ if (query == undefined) {} else {
             document.getElementById('optifine').src = 'https://optifine.net/capes/' + username + '.png'; // set the optifine cape image
         }
 
+        // update skin viewer cape image
+        //if (optifineExists === true) { // user has an optifine cape
+        //    skinViewer.loadCape('https://api.gapple.pw/cors/optifine/' + username); // this CORS proxy doesn't error out if no cape is present, that's why we use both endpoints
+        //} else { // no cape :(
+        //    skinViewer.loadCape(null);
+        //}
+
+        console.log(data.name_history);
+
         // name history stuff
         for (var i = data.name_history.length - 1; i >= 0; i--) { // loop through name history (REVERSED)
             if (i === 0) { // add original name
