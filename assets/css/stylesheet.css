@@ -65,3 +65,7 @@ input {
     background-color: #1b151f;
     color: white;
 }
+
+.col-sm-4 {
+    padding-bottom: 50px;
+}
