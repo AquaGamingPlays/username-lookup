@@ -11,6 +11,11 @@
     background-color: #1b151f;
 }
 
+.list-dm {
+    background-color: #1b151f;
+    border: 1px solid rgba(255, 255, 255, 255);
+}
+
 .center {
     text-align: center;
     margin: 0 auto;
@@ -59,4 +64,8 @@ input {
     /* border: 1px solid white; */
     background-color: #1b151f;
     color: white;
+}
+
+.col-sm-4 {
+    padding-bottom: 50px;
 }
