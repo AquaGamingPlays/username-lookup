@@ -1,7 +1,5 @@
 // lookup.js
 // copyright (c) tanpug 2020
-var alert_mode = "";
-var name_status = "";
 
 // user info stuff
 if (query == undefined) {} else {
