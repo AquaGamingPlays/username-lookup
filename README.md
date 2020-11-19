@@ -1,7 +1,7 @@
 # Username Lookup
 Username lookup for Minecraft.
 
-This is plain HTML/CSS/JS, with a bit of added jQuery and Bootstrap. Everything is done on the client side. Most / all requests are passed through to our [gapple](https://api.gapple.pw) endpoints for CORS reasons but all goes through either [Ashcon's API](https://github.com/Electroid/mojang-api) or through the normal Mojang API.
+This is plain HTML/CSS/JS, with a bit of added jQuery and Bootstrap. Everything is done on the client side. Most / all requests are passed through to our [gapple](https://api.gapple.pw) endpoints for CORS reasons or our mcapi.workers.dev endpoints for the same CORS reasons/ratelimiting reasons but everything goes through either [Ashcon's API](https://github.com/Electroid/mojang-api) or through the normal Mojang API, with the exception of name drop checking, which uses [nx](https://github.com/fall)'s API.
 
 This website was written as an alternative to NameMC that provided more features for the Minecraft account community, for example searching pseudo hard-deleted users, finding account creation dates, and not having to worry that uncached capes will be cached on NameMC (since we don't cache anything and everything is done on the client side).
 
