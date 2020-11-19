@@ -23,11 +23,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
-          </li>
           <li class="nav-item">
-            <a class="nav-link" href="./phd.html">PHD Checker</a>
+            <a class="nav-link" href="./index.html">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="./phd.html">PHD Checker <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://github.com/88" target="_blank">Source Code / Other Projects</a>
@@ -35,7 +35,7 @@
           <button class="btn btn-primary my-2 my-sm-0" id="dark4" onClick="dmToggle()">Toggle dark mode</button>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" id="searchbar" placeholder="Username / UUID" name="lookup" aria-label="Search">
+          <input class="form-control mr-sm-2" type="search" id="searchbar" placeholder="UUID" name="lookup" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
         </form>
       </div>
@@ -43,14 +43,12 @@
     <br>
     <div class="alert alert-secondary" role="alert" style="margin: auto; width: 740px" id="alertbox">
       <h4 class="alert-heading">Hey!</h4>
-      You haven't searched a name yet, so there are no results to show you :(
+      You haven't searched a UUID yet, so there are no results to show you :(
       <br>
       Go to the search box in the menu and type a name to search!
     </div>
   </body>
-  <script src="assets/js/skinview3d.bundle.js"></script>
-  <script src="assets/js/skin_viewer_init.js"></script>
   <script src="assets/js/darkmode.js"></script>
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/lookup.js"></script>
+  <script src="assets/js/phd.js"></script>
 </html>
