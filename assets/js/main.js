@@ -4,8 +4,11 @@
 // variables
 if (location.href.includes("?lookup=")) {
     var query = location.href.substring(location.href.indexOf("?lookup=") + 8); // get username that we want to look up
+    if (query == "") { // catch this dumb error
+        var query = undefined;
+    }
 } else {
-    var query = undefined;
+    var query = undefined; // no query provided
 }
 var ratelimitedHTML = '<br>We\'re ratelimited, so we can\'t get the creation date. Try again later.'; // code 1003 / HTTP 429
 var takenHTML = 'The provided name isn\'t taken on any account.'; // code 1001
@@ -37,7 +40,7 @@ function removeHTML(elementId, HTMLToRemove) {
     element.innerHTML = element.innerHTML.replace(HTMLToRemove, '');
 }
 
-var darkmodetoggle = localStorage.getItem('darkmode');
-if (darkmodetoggle === "true") {
+var darkmodetoggle = localStorage.getItem('darkmode'); // dark mode toggle
+if (darkmodetoggle === "true") { // turn on dark mode if it's set to true
     darkMode();
 }

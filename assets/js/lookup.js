@@ -4,11 +4,18 @@
 // user info stuff
 if (query == undefined) {} else {
     $.get("https://blockcheck.mcapi.workers.dev/name/" + query).done(function(data) {
-        // migration status checks
-        if (data.status == "blocked") {
+        if (data.status == "blocked") { // if the name is blocked
             var alert_mode = "alert-warning"
             var name_status = '<p>The username ' + query + ' is currently blocked.<br>Usernames can be blocked by username snipers or via an API request (unless the person who blocked the name re-blocks it, it will only be blocked for 24 hours).<br>Usernames can also be permanently blocked by Mojang\'s username filter.<br>Usernames can also <i>appear</i> blocked if they are pseudo-hard-deleted, but you can\'t check if this is the case unless you have the account\'s UUID.</p>'; // if name is blocked
-        } else if (data.status == "taken") {
+        } else if (data.status == "available") { // if the name is available
+            var alert_mode = "alert-success"
+            var name_status = '<p>The username ' + query + ' is available and ready to claim!</p>'; // if name is available
+        } else if (data.status == "soon") { // if the name is dropping
+            var alert_mode = "alert-primary"
+            var drop_time = new Date(data.drop_time);
+            var parsed_dt = drop_time.toLocaleString('en-US');
+            var name_status = '<p>The username ' + query + ' is currently dropping!<br>The username will be available on <b>' + parsed_dt + '</b>.<br>Get your snipers ready! Try <a href="https://github.com/Kqzz/MCsniperPY" target="_blank">MCSniperPY</a> if you don\'t have a sniper yet!</p>'; // if name is dropping
+        } else if (data.status == "taken") { // if the name is taken
             removeElement('alertbox'); // get rid of the alert
             new_html = '<div class="container" style="text-align:center"><div class="row" style="text-align:center"><div id="skinbox" class="col-sm-4" style="text-align:center"><h3>Skin</h3><div id="skin_container" width="180" height="433"></div><button class="btn btn-primary btn-sm" id="dark10" onClick="(walk.paused = !walk.paused)">Pause</button></div><div id="userbox" class="col-sm-4"><h3>User Info</h3><ul id="dark" class="list-group" style="text-align:center"><li id="username" class="list-group-item"></li><li id="status" class="list-group-item"><!-- <button class="btn btn-primary btn-sm" id="dark11" onClick="creation(document.getElementById(\'username\').innerHTML)" style="display: none;">Find Creation Date</button> !--></li><li id="uuid" class="list-group-item"><code id="uuidcode dark9"></code></li><li id="history" class="list-group-item"></li></ul></div><div id="capebox" class="col-sm-4"><h3>Cape Info</h3><ul id="dark6" class="list-group" style="text-align:center"><li id="dark7" class="list-group-item">Minecraft Cape<br/><img id="minecraft" width="92" height="44"></li><li id="dark8" class="list-group-item">OptiFine Cape<br/><img id="optifine" width="92" height="44"></li></ul></div></div></div>';
             // ^^^^^^ add new html for the actual skin viewer, user info, cape info etc
@@ -177,15 +184,8 @@ if (query == undefined) {} else {
                         }
                     });
             }
-        } else if (data.status == "available") {
-            var alert_mode = "alert-success"
-            var name_status = '<p>The username ' + query + ' is available and ready to claim!</p>'; // if name is available
-        } else if (data.status == "soon") {
-            var alert_mode = "alert-primary"
-            var drop_time = new Date(data.drop_time);
-            var parsed_dt = drop_time.toLocaleString('en-US');
-            var name_status = '<p>The username ' + query + ' is currently dropping!<br>The username will be available on <b>' + parsed_dt + '</b>.<br>Get your snipers ready! Try <a href="https://github.com/Kqzz/MCsniperPY" target="_blank">MCSniperPY</a> if you don\'t have a sniper yet!</p>'; // if name is dropping
         }
+        // replace the alert info with new content based on what error we encountered
         var w = document.getElementById("alertbox");
         w.classList.toggle("alert-secondary")
         w.classList.toggle(alert_mode)
