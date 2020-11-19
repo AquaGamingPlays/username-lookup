@@ -4,7 +4,7 @@
 // user info stuff
 if (query == undefined) {} else {
     removeElement('alertbox'); // get rid of the alert
-    new_html = '<div class="container" style="text-align:center"><div class="row" style="text-align:center"><div id="userbox" class="col-sm-4"><h3>User Info</h3><ul id="dark" class="list-group" style="text-align:center"><li id="username" class="list-group-item"></li><li id="status" class="list-group-item"></li><li id="uuid" class="list-group-item"><code id="uuidcode dark9"></code></li><li id="history" class="list-group-item"></li></ul></div><div id="capebox" class="col-sm-4"><h3>Cape Info</h3><ul id="dark6" class="list-group" style="text-align:center"><li id="dark8" class="list-group-item">OptiFine Cape<br/><img id="optifine" width="92" height="44"></li></ul></div></div></div>';
+    new_html = '<div class="container" style="text-align:center"><div class="row" style="text-align:center"><div class="col-sm-2"></div><div id="userbox" class="col-sm-4"><h3>User Info</h3><ul id="dark" class="list-group" style="text-align:center"><li id="username" class="list-group-item"></li><li id="status" class="list-group-item"></li><li id="uuid" class="list-group-item"><code id="uuidcode dark9"></code></li><li id="history" class="list-group-item"></li></ul></div><div id="capebox" class="col-sm-4"><h3>Cape Info</h3><ul id="dark6" class="list-group" style="text-align:center"><li id="dark8" class="list-group-item">OptiFine Cape<br/><img id="optifine" width="92" height="44"></li></ul></div><div class="col-sm-2"></div></div></div>';
     // ^^^^^^ add new html for the actual skin viewer, user info, cape info etc
     document.getElementById('bodybox').innerHTML += new_html; // add the new html
     var darkmodetoggle = localStorage.getItem('darkmode'); // check if we have dark mode toggled
@@ -46,15 +46,6 @@ if (query == undefined) {} else {
         if (optifineExists === true) {
             document.getElementById('optifine').src = 'https://optifine.net/capes/' + username + '.png'; // set the optifine cape image
         }
-
-        // update skin viewer cape image
-        //if (optifineExists === true) { // user has an optifine cape
-        //    skinViewer.loadCape('https://api.gapple.pw/cors/optifine/' + username); // this CORS proxy doesn't error out if no cape is present, that's why we use both endpoints
-        //} else { // no cape :(
-        //    skinViewer.loadCape(null);
-        //}
-
-        console.log(data.name_history);
 
         // name history stuff
         for (var i = data.name_history.length - 1; i >= 0; i--) { // loop through name history (REVERSED)
