@@ -186,7 +186,6 @@ if (query == undefined) {} else {
             var parsed_dt = drop_time.toLocaleString('en-US');
             var name_status = '<p>The username ' + query + ' is currently dropping!<br>The username will be available on <b>' + parsed_dt + '</b>.<br>Get your snipers ready! Try <a href="https://github.com/Kqzz/MCsniperPY" target="_blank">MCSniperPY</a> if you don\'t have a sniper yet!</p>'; // if name is dropping
         }
-        console.log(name_status);
         var w = document.getElementById("alertbox");
         w.classList.toggle("alert-secondary")
         w.classList.toggle(alert_mode)
