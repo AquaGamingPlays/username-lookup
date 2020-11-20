@@ -115,7 +115,8 @@ if (query == undefined) {} else {
                 if (data.created_at == undefined) { // nothing lol
                 } else {
                     if (data.created_at != null) { // not unmigrated
-                        document.getElementById('status').innerHTML += 'Created at: ' + data.created_at + ' <sup><span title="Creation dates are inaccurate for a lot of accounts due to a breaking change on Mojang\'s end. We are currently fetching dates from Ashcon\'s API. Please yell at Mojang (WEB-3367) in order for accurate creation dates to return.">[may be inaccurate]</span></sup>';
+                        document.getElementById('status').innerHTML += '<text data-toggle="tooltip" data-placement="top" data-html="true" title="<b>Creation dates are inaccurate for a lot of accounts due to a breaking change on Mojang\'s end. We are currently fetching dates from Ashcon\'s API. Please yell at Mojang (WEB-3367) in order for accurate creation dates to return.</b>">Created at: ' + data.created_at + '</text>';
+                        $('[data-toggle="tooltip"]').tooltip()
                     }
                 }
 
